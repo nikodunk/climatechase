@@ -39,8 +39,11 @@ class App extends Component {
   }
 
   getRequest(){
-      $.get("http://localhost:5000/", result => this.setState({result: result}) )
-      console.log(this.state.result)
+      fetch("http://localhost:5000/")
+      .then(results => {return results.json()} )
+      .then( data => this.setState({result: data}))
+
+      console.log('state' + this.state.result)
    }
 
 
