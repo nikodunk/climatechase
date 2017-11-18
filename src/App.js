@@ -12,11 +12,9 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {  results: {
-                        gdp: 1000000,
-                        gdpgrowth: 5,
-                        funds: 100000
-                          }
+    this.state = {  results: {  gdp: 1000000,
+                                gdpgrowth: 5,
+                                funds: 100000 }
                   }
       
   }
