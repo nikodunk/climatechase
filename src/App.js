@@ -39,8 +39,9 @@ class App extends Component {
   }
 
   getRequest(){
-      var test
+      var test = 'oentwothree'
       $.get("http://localhost:5000/", function(result){
+        console.log(test)
             test = result
      })
       console.log(test)
