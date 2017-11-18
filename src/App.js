@@ -34,7 +34,15 @@ class App extends Component {
 
   onClick(e){
     console.log(e.target.id)
-    $.post( "http://127.0.0.1:5000/" + e.target.id + "/", data => console.log(data));
+    $.ajax({
+      type: "POST",
+      url: "http://127.0.0.1:5000/" + e.target.id + "/",
+      data: this.state,
+      success: data => console.log(data),
+      dataType: 'json'
+    });
+
+    // $.post( "http://127.0.0.1:5000/" + e.target.id + "/", data => console.log(data));
   }
 
   render() {
