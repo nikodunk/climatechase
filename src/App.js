@@ -34,8 +34,7 @@ class App extends Component {
 
   onClick(e){
     console.log(e.target.id)
-    console.log(this.state)
-    $.post( "ajax/test.html", data => console.log(data));
+    $.post( "http://127.0.0.1:5000/" + e.target.id + "/", data => console.log(data));
   }
 
   render() {
