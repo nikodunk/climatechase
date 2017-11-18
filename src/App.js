@@ -40,6 +40,7 @@ class App extends Component {
 
   getRequest(){
       $.get("http://localhost:5000/", result => this.setState({result}) )
+      console.log(this.state)
    }
 
 
