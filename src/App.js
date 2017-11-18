@@ -12,12 +12,23 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {  results: {  budget: 10,
-                                gdp: 100,
-                                gdpgrowth: 5,
-                                year: 2010},
-                    time: 2010
-                  }
+    this.state = {
+        'Money': 'test',
+        'Emissions Per Year (GHP)': 200,
+        'Start_Year': 2017,
+        'Curr_Year': 2017,
+        'Solar_Investment': 0,
+        'Wind_Investment': 0,
+        'Nuclear_Investment': 0,
+        'Gas_Investment': 0,
+        'GDP': 18566900000000,
+        'Sea_Levels': 0,
+        'Electricity_Price': 0,
+        'Probability_of_violence': 0,
+        'Agriculture': 0,
+        'Risk_of_Hurricane': 0,
+        'Game_Over': false
+    }
       
   }
 
@@ -27,19 +38,12 @@ class App extends Component {
             this.setState({results: result});
             console.log(this.state.results);
      })
-    setInterval(function() {this.setState({time: this.state.time + 1})}.bind(this), 500)
   } 
 
 
-
-
-
   onClick(e){
-    console.log('sending this to backend: +1 ' + e.target.id + ' clicked')
-    var updatedResults = this.state.results
-    updatedResults.budget = updatedResults.budget - 1
-    this.setState({results: updatedResults})
-    $.post("http://localhost:5000/", this.state.input)
+    console.log(e.target.id)
+    $.post("http://localhost:5000/" + e.target.id, e.target.id)
   }
 
   render() {
@@ -48,10 +52,10 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" /><h1 className="App-title">ClimateChase</h1>
         </header>
-        <h1 className="subtitle"> GDP: ${this.state.results.gdp} </h1>
-        <h1 className="subtitle"> Growth: {this.state.results.gdpgrowth}% </h1>
-        <h1 className="subtitle"> Budget: ${this.state.results.budget}</h1>
-        <h1 className="subtitle"> Date: {this.state.time}</h1>
+        <h1 className="subtitle" id="GDP"> GDP: ${this.state.GDP} </h1>
+        <h1 className="subtitle" id="GDP"> GDP: ${this.state.GDP} </h1>
+        <h1 className="subtitle" id="Year">{this.state.Curr_Year} </h1>
+        <h1 className="subtitle" id="Year">Finances: ${this.state.Money} </h1>
         invest<br />
         <button onClick={this.onClick.bind(this)} id="wind">$1=>windpower</button><br />
         <button onClick={this.onClick.bind(this)} id="solar">$1=>solar</button><br />
