@@ -33,12 +33,20 @@ class App extends Component {
   }
 
   componentDidMount() {
-    $.get("http://localhost:5000/", function(result){
+
+    getRequest().bind(this)
+    
+  }
+
+  getRequest(){
+      $.get("http://localhost:5000/", function(result){
         console.log('the backend just sent you this:' + result )
-            this.setState(result).bind(this);
+            this.setState(result);
             console.log(this.state);
-     })
-  } 
+     }
+  }
+
+
 
 
   onClick(e){
