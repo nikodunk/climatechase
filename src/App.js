@@ -44,7 +44,7 @@ class App extends Component {
       },
       body: JSON.stringify(this.state),
       success: function(data) {
-        console.log(data)
+        console.log(JSON.parse(data))
         this.setState({data: data});
       }.bind(this)
     })
