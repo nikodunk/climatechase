@@ -7,10 +7,9 @@ class App extends Component {
 
   componentDidMount() {
     $.getJSON("http://localhost:5000/data.json", function(result){
-            console.log('this works and is the JSON:' + result )
+            console.log('the backend just sent you this:' + result )
          })
   } 
-
 
 
   render() {
