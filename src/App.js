@@ -24,20 +24,17 @@ class App extends Component {
   
 
   getData(){
-    
     var url = "http://127.0.0.1:5000/"
         $.get(url).then(result => {
             this.setState(JSON.parse(result))
           })
-        console.log(this.state)
-      
+        console.log(this.state)   
   }
 
 
   onClick(e){
     console.log(e.target.id)
-    $.post("http://localhost:5000/" + e.target.id, e.target.id)
-    this.getData()
+    $.post("http://localhost:5000/" + e.target.id + '/', result => this.setState(JSON.parse(result)))
   }
 
   render() {
@@ -51,10 +48,10 @@ class App extends Component {
         <h1 className="subtitle" >Finances: ${this.state.Money}</h1>
         <hr />
         <h2>invest in</h2>
-        <button onClick={this.onClick.bind(this)} id="wind">$1=>windpower</button>
-        <button onClick={this.onClick.bind(this)} id="solar">$1=>solar</button>
-        <button onClick={this.onClick.bind(this)} id="nuclear">$1=>nuclear</button>
-        <button onClick={this.onClick.bind(this)} id="fossil">$1=>fossil</button>
+        <button onClick={this.onClick.bind(this)} id="wind">wind</button>
+        <button onClick={this.onClick.bind(this)} id="solar">solar</button>
+        <button onClick={this.onClick.bind(this)} id="nuclear">nuclear</button>
+        <button onClick={this.onClick.bind(this)} id="fossil">fossil</button>
       </div>
     );
   }
