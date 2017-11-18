@@ -35,9 +35,9 @@ class App extends Component {
   componentDidMount() {
     $.get("http://localhost:5000/", function(result){
         console.log('the backend just sent you this:' + result )
-            this.setState(result);
+            this.setState(result).bind(this);
             console.log(this.state);
-     }.bind(this))
+     })
   } 
 
 
