@@ -6,7 +6,7 @@ import $ from 'jquery';
 class App extends Component {
 
   componentDidMount() {
-    $.getJSON("http://localhost:5000/", function(result){
+    $.get("http://localhost:5000/", function(result){
             console.log('the backend just sent you this:' + result )
          })
   } 
