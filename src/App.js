@@ -37,7 +37,7 @@ class App extends Component {
         console.log('the backend just sent you this:' + result )
             this.setState(result);
             console.log(this.state);
-     })
+     }.bind(this))
   } 
 
 
