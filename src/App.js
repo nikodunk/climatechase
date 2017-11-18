@@ -34,7 +34,14 @@ class App extends Component {
 
   onClick(e){
     console.log(e.target.id)
-    $.post("http://localhost:5000/" + e.target.id + '/', result => this.setState(JSON.parse(result)))
+    console.log(this.state)
+
+    $.ajax({
+      type: "POST",
+      url: 'http://localhost:5000/' + e.target.id + '/',
+      data: this.state,
+      success: result => console.log(result),
+    });
   }
 
   render() {
