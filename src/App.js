@@ -43,10 +43,9 @@ class App extends Component {
       $.get("http://localhost:5000/", function(result){
             console.log('the backend just sent you this:' + result )
             test = result
-            console.log(result);
      })
       this.setState(test)
-      console.log(test)
+      console.log(this.state)
    }
 
 
