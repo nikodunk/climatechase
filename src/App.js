@@ -18,22 +18,26 @@ class App extends Component {
   }
 
   componentDidMount() {
-      this.getData()  
+      this.getData()
   }
 
+  
 
   getData(){
+    
     var url = "http://127.0.0.1:5000/"
         $.get(url).then(result => {
             this.setState(JSON.parse(result))
           })
         console.log(this.state)
+      
   }
 
 
   onClick(e){
     console.log(e.target.id)
     $.post("http://localhost:5000/" + e.target.id, e.target.id)
+    this.getData()
   }
 
   render() {
