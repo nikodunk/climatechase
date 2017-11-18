@@ -44,10 +44,9 @@ class App extends Component {
             console.log('the backend just sent you this:' + result )
             test = result
      })
-      this.setState(test)
+      this.setState({test})
       console.log(this.state)
    }
-
 
 
 
