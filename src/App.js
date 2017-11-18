@@ -41,9 +41,9 @@ class App extends Component {
   getRequest(){
       var test
       $.get("http://localhost:5000/", function(result){
-            console.log('the backend just sent you this:' + result )
             test = result
      })
+      console.log(test)
       this.setState({test})
       console.log(this.state)
    }
