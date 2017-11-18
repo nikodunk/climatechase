@@ -33,19 +33,19 @@ jsonObject = {
 
 @app.route("/")
 def home():
-    return str(json.dumps(jsonObject))
+    return json.dumps(jsonObject)
 
 @app.route('/instructions/')
 def instructions():
-    return str(json.dumps(jsonObject))
+    return json.dumps(jsonObject)
 
 @app.route('/about/')
 def about():
-    return str(json.dumps(jsonObject))
+    return json.dumps(jsonObject)
 
 @app.route('/play/')
 def play():
-    return str(json.dumps(jsonObject))
+    return json.dumps(jsonObject)
 
 @app.route('/give_data/', methods=['GET'])
 def give_data():
@@ -63,14 +63,16 @@ def receive_data():
 @app.route('/lose/', methods=['GET'])
 def lose():
     global jsonObject
-    jsonObject[Game_Over] = True
-    return str(jsonObject)
+    jsonObject['Money'] -= 1000000000000
+    jsonObject['Game_Over'] = True
+    return json.dumps(jsonObject)
 
 @app.route('/win/', methods=['GET'])
 def win():
     global jsonObject
-    jsonObject[Game_Over] = False
-    return str(jsonObject)
+    jsonObject['Money'] += 1
+    jsonObject['Game_Over'] = False
+    return json.dumps(jsonObject)
 
 def change_wind(parameters):
     pass
@@ -85,28 +87,28 @@ def wind():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        return str(json.dumps(jsonObject))
+        return json.dumps(jsonObject)
 
 @app.route('/nuclear/', methods=['POST'])
 def nuclear():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        return str(json.dumps(jsonObject))
+        return json.dumps(jsonObject)
 
 @app.route('/solar/', methods=['POST'])
 def solar():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        return str(json.dumps(jsonObject))
+        return json.dumps(jsonObject)
 
 @app.route('/fossil/', methods=['POST'])
 def fossil():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        return str(json.dumps(jsonObject))
+        return json.dumps(jsonObject)
 
 
 
