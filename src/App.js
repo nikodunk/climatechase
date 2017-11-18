@@ -33,16 +33,21 @@ class App extends Component {
 
 
   onClick(e){
-    console.log(e.target.id)
-    $.ajax({
-      type: "POST",
-      url: "http://127.0.0.1:5000/" + e.target.id + "/",
-      data: this.state,
-      success: data => console.log(data),
-      dataType: 'json'
-    });
+    // console.log(e.target.id)
+    // console.log(this.state)
 
-    // $.post( "http://127.0.0.1:5000/" + e.target.id + "/", data => console.log(data));
+    fetch('http://localhost:5000/' + e.target.id + '/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(this.state),
+      success: function(data) {
+        console.log(data)
+        this.setState({data: data});
+      }.bind(this)
+    })
   }
 
   render() {
