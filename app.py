@@ -22,7 +22,6 @@ jsonObject = {
         'nuclear': 0,
         'fossil': 0,
         
-
         'Sea_Levels': 0,
         'Electricity_Price': 0,
         'Agriculture': 0,
@@ -69,6 +68,12 @@ def update_climate(jsonObject):
     jsonObject['GDP'] = round(jsonObject['GDP'] * 1.01, 2)
     jsonObject['Money'] = round(jsonObject['Money'] + jsonObject['GDP'] * .01, 2)
     jsonObject['GHG'] = update_ghg(jsonObject, input_to_ghg_map)[1]
+    curr_ghg = jsonObject['GHG']
+    hurCalc(curr_ghg) = jsonObject['']
+    ACCalc(curr_ghg, jsonObject['fossil'], jsonObject['nuclear']) = jsonObject['']
+    agriCalc(curr_ghg, jsonObject['fossil']) = jsonObject['']
+    ecoCalc(curr_ghg, jsonObject['solar'], jsonObject['wind'], jsonObject['nuclear'], jsonObject['fossil']) = jsonObject['']
+
     return jsonObject
 
 def hurCalc(carbon):
