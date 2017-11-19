@@ -12,16 +12,18 @@ input_to_ghg_map = {
             "Fossil_Investment": 1.5}
 
 jsonObject = {
+        'Start_Year': 2017,
         'Money': 100,
         'Emissions Per Year (GHG)': 200,
         'GHG': 1000000,
-        'Start_Year': 2017,
+
         'Curr_Year': 2017,
         'Solar_Investment': 0,
         'Wind_Investment': 0,
         'Nuclear_Investment': 0,
         'Fossil_Investment': 0,
         'GDP': 1000,
+
         'Sea_Levels': 0,
         'Electricity_Price': 0,
         'Agriculture': 0,
@@ -62,7 +64,7 @@ def update_climate(jsonObject):
     jsonObject['Curr_Year'] += 1
     jsonObject['GDP'] *= 1.01
     jsonObject['Money'] += jsonObject['GDP'] * .01
-    pass
+    return jsonObject
 
 def hurCalc(carbon):
     x = random.random()
@@ -105,7 +107,7 @@ def update_ghg(jsonObject, input_to_ghg_map):
        ghg_fraction = 1.0 * ghg_temp_val / ghg_max_pos_val
    else:
        ghg_fraction = 1.0 * ghg_temp_val / ghg_max_neg_val
-   return (ghg_temp_val,ghg_fraction)
+   return (ghg_temp_val, ghg_fraction)
 
 #########################################################
 # Routes
@@ -166,7 +168,7 @@ def wind():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['Wind_Investment'] += 1
-        jsonObject = update_climate()
+        jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
 @app.route('/nuclear/', methods=['POST'])
@@ -175,7 +177,7 @@ def nuclear():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['Nuclear_Investment'] += 1
-        jsonObject = update_climate()
+        jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
 @app.route('/solar/', methods=['POST'])
@@ -184,7 +186,7 @@ def solar():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['Solar_Investment'] += 1
-        jsonObject = update_climate()
+        jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
 @app.route('/fossil/', methods=['POST'])
@@ -193,7 +195,7 @@ def fossil():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['Fossil_Investment'] += 1
-        jsonObject = update_climate()
+        jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
 if __name__ == "__main__":
