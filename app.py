@@ -23,26 +23,21 @@ jsonObject = {
         'nuclear': 0,
         'fossil': 0,
         'GDP_Growth': 1.1,
+        'economy': 1.1,
 
         'Sea_Levels': 0,
         'Electricity_Price': 0,
         'Agriculture': 0,
 
-        'Risk_of_Hurricane': 0,
+        #'Risk_of_Hurricane': 0,
         'Hurricanes_Happen': False,
-        'Number_of_Hurricanes': 0,
+        #'Number_of_Hurricanes': 0,
 
-        'Risk_of_Riots': 0,
-        'Riots_Happen': False,
-        'Number_of_Riots': 0,
+        #'Risk_of_Riots': 0,
+        'AC_Happen': False,
+        #'Number_of_Riots': 0,
 
-        'Risk_of_Famines': 0,
-        'Famines_Happen': False,
-        'Number_of_Famines': 0,
-
-        'Risk_of_Recessions': 0,
-        'Recessions_Happen': False,
-        'Number_of_Recessions': 0,
+        'GDP_Growth': 0,
 
         'Game_Over': False
     }
@@ -77,8 +72,16 @@ def update_climate(jsonObject):
         return jsonObject
     jsonObject['Curr_Year'] += 1
     jsonObject['GDP'] = round(jsonObject['GDP'] * jsonObject['GDP_Growth'], 2)
+    jsonObject['GDP'] = round(jsonObject['GDP'] * 1.01 + jsonObject['GDP_Growth'], 2)
+    jsonObject['GDP'] = round(jsonObject['GDP'] * jsonObject['economy'], 2)
     jsonObject['Money'] = round(jsonObject['Money'] + jsonObject['GDP'] * .01, 2)
     jsonObject['GHG'] = update_ghg(jsonObject, input_to_ghg_map)[1]
+    curr_ghg = jsonObject['GHG']
+    hurCalc(curr_ghg) = jsonObject['Hurricanes_Happen']
+    ACCalc(curr_ghg, jsonObject['fossil'], jsonObject['nuclear']) = jsonObject['AC_Happen']
+    agriCalc(curr_ghg, jsonObject['fossil']) = jsonObject['']
+    ecoCalc(curr_ghg, jsonObject['solar'], jsonObject['wind'], jsonObject['nuclear'], jsonObject['fossil']) = jsonObject['GDP_Growth']
+
     return jsonObject
 
 def hurCalc(carbon):
@@ -93,12 +96,6 @@ def ACCalc(carbon, fSpent, nSpent):
     carbon += twoSpent/degree + x
     return carbon > 1
     # if true, armed conflict occurs
-
-def agriCalc(carbon, fSpent):
-    x = random.random()
-    carbon += fSpent/degree + x
-    return carbon
-    # adds to economy growth
 
 def ecoCalc(carbon, sSpent, wSpent, nSpent, fSpent):
     x = random.random()
@@ -123,6 +120,15 @@ def update_ghg(jsonObject, input_to_ghg_map):
    else:
        ghg_fraction = 1.0 * ghg_temp_val / ghg_max_neg_val
    return (ghg_temp_val, ghg_fraction)
+
+def lose(jsonObject):
+    if jsonObject['Game_Over'] or jsonObject['GDP'] < 0 or jsonObject['Money'] < 0:
+        return True
+    if jsonObject['Curr_Year'] - jsonObject['Start_Year'] > 200:
+        return jsonObject['GHG'] > 1000000
+
+def win(jsonObject):
+    return jsonObject['GHG'] < 10000
 
 #########################################################
 # Routes
@@ -220,3 +226,4 @@ def fossil():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
