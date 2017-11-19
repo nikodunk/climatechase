@@ -27,17 +27,9 @@ jsonObject = {
         'economy': 1.1,
 
 >>>>>>> 2f71346d4fa7755e1a2c4277b36bcb84f5ab4298
-        'Sea_Levels': 0,
-        'Electricity_Price': 0,
-        'Agriculture': 0,
-
-        #'Risk_of_Hurricane': 0,
         'Hurricanes_Happen': False,
-        #'Number_of_Hurricanes': 0,
 
-        #'Risk_of_Riots': 0,
         'AC_Happen': False,
-        #'Number_of_Riots': 0,
 
         'GDP_Growth': 0,
 
