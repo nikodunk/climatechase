@@ -14,26 +14,26 @@ class App extends Component {
 
     this.state = {
     }
-      
+
   }
 
   componentDidMount() {
       this.getData()
   }
 
-  
 
   getData(){
+    clearTimeout()
     var url = "http://127.0.0.1:5000/"
-        $.get(url).then(result => {
-            this.setState(JSON.parse(result))
-          })
-        console.log(this.state)   
+    $.get(url).then(result => {
+        this.setState(JSON.parse(result))
+      }) 
+    setTimeout( this.getData.bind(this), 1000)
   }
 
 
   onClick(e){
-    // console.log(e.target.id)
+    console.log(e.target.id)
     // console.log(this.state)
 
     fetch('http://localhost:5000/' + e.target.id + '/', {
@@ -43,11 +43,10 @@ class App extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(this.state),
-      success: function(data) {
-        console.log(JSON.parse(data))
-        this.setState({data: data});
-      }.bind(this)
+      success: console.log('success')
     })
+    
+    
   }
 
   render() {

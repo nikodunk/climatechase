@@ -30,6 +30,8 @@
 
 
 button{
-  padding: 30px;
+  height: 100px;
+  width:20%;
   margin: 2px;
+  float: bottom;
 }
