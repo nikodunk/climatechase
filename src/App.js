@@ -55,15 +55,14 @@ class App extends Component {
         <header className="App-header">
             <h1 className="App-title">ClimateChase</h1>
         </header>
-        <div>
-          year <br />
+        <div style={{'margin-top': '20px'}}>
+          year
           <h1>{this.state.Curr_Year}</h1>
           <hr style={{'max-width': 100}} />
-          <h4> GDP: ${Math.round(this.state.GDP)}</h4>
-          <h4>Finances: ${Math.round(this.state.Money)}</h4>
-          <br />
+          <h4> GDP: ${Math.round(this.state.GDP)}B</h4>
+          <h4> GHGe: {Math.round(this.state.GHG)}kgCO2</h4>
+          <h4>Budget: ${Math.round(this.state.Money)}B</h4>
           <hr />
-          <br />
           <p>invest in</p>
         </div>
         <div class="container">

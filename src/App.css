@@ -29,17 +29,11 @@
 }
 
 .container{
-  margin-top: 100px;
+  margin-top: 0px;
   width: 100%;
   position: relative;
 }
 
-.bottomBox{
-  width: 100%;
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-}
 
 button{
   height: 100px;
