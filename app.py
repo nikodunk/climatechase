@@ -35,7 +35,9 @@ jsonObject = {
 
         'GDP_Growth': 0,
 
+        'Win': False,
         'Game_Over': False
+
     }
 
 #########################################################
