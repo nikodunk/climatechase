@@ -55,14 +55,14 @@ def ACCalc(carbon, fSpent, nSpent):
 def agriCalc(carbon, fSpent):
 	x = random.random()
 	carbon += fSpent/degree + x
-	return carbon
+	return carbon/4 - .2
 	# adds to economy growth
 
 def ecoCalc(carbon, sSpent, wSpent, nSpent, fSpent):
 	x = random.random()
 	totalSpent = sSpent + wSpent + nSpent + fSpent
 	carbon += totalSpent/degree + x
-	return carbon
+	return carbon/2 - .2
 	# defines economic growth
 
 
