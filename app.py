@@ -6,10 +6,10 @@ app = Flask(__name__)
 
 # Wind, solar, nuclear, fossil
 input_to_ghg_map = {
-            "Nuclear_Investment": -0.5,
-            "Solar_Investment": -0.3,
-            "Wind_Investment": -0.2,
-            "Fossil_Investment": 1.5}
+            "nuclear": -0.5,
+            "solar": -0.3,
+            "wind": -0.2,
+            "fossil": 1.5}
 
 jsonObject = {
         'Start_Year': 2017,
@@ -18,10 +18,10 @@ jsonObject = {
         'GHG': 1000000,
 
         'Curr_Year': 2017,
-        'Solar_Investment': 0,
-        'Wind_Investment': 0,
-        'Nuclear_Investment': 0,
-        'Fossil_Investment': 0,
+        'solar': 0,
+        'wind': 0,
+        'nuclear': 0,
+        'fossil': 0,
         'GDP': 1000,
 
         'Sea_Levels': 0,
@@ -62,8 +62,9 @@ def change_wind(jsonObject):
 
 def update_climate(jsonObject):
     jsonObject['Curr_Year'] += 1
-    jsonObject['GDP'] *= 1.01
-    jsonObject['Money'] += jsonObject['GDP'] * .01
+    jsonObject['GDP'] = round(jsonObject['GDP'] * 1.01, 2)
+    jsonObject['Money'] round(jsonObject['Money'] + jsonObject['GDP'] * .01, 2)
+    jsonObject['GHG'] = update_ghg(jsonObject, input_to_ghg_map)[1]
     return jsonObject
 
 def hurCalc(carbon):
@@ -88,21 +89,21 @@ def agriCalc(carbon, fSpent):
 def ecoCalc(carbon, sSpent, wSpent, nSpent, fSpent):
     x = random.random()
     totalSpent = sSpent + wSpent + nSpent + fSpent
-    carbon += totalSpent/degree + x
+    carbon += totalSpent / degree + x
     return carbon
     # defines economic growth
 
 def update_ghg(jsonObject, input_to_ghg_map):
-   total_budget = jsonObject['Solar_Investment'] \
-                  + jsonObject['Wind_Investment'] \
-                  + jsonObject['Nuclear_Investment'] \
-                  + jsonObject['Fossil_Investment']
-   ghg_max_pos_val = total_budget * input_to_ghg_map['Fossil_Investment']
-   ghg_max_neg_val = total_budget * input_to_ghg_map['Solar_Investment'] * -1.0
-   ghg_temp_val = jsonObject['Solar_Investment']* input_to_ghg_map['Solar_Investment'] \
-                  + jsonObject['Wind_Investment']* input_to_ghg_map['Wind_Investment'] \
-                  + jsonObject['Nuclear_Investment']* input_to_ghg_map['Nuclear_Investment'] \
-                  + jsonObject['Fossil_Investment']* input_to_ghg_map['Fossil_Investment']
+   total_budget = jsonObject['solar'] \
+                  + jsonObject['wind'] \
+                  + jsonObject['nuclear'] \
+                  + jsonObject['fossil']
+   ghg_max_pos_val = total_budget * input_to_ghg_map['fossil']
+   ghg_max_neg_val = total_budget * input_to_ghg_map['solar'] * -1.0
+   ghg_temp_val = jsonObject['solar']* input_to_ghg_map['solar'] \
+                  + jsonObject['wind']* input_to_ghg_map['wind'] \
+                  + jsonObject['nuclear']* input_to_ghg_map['nuclear'] \
+                  + jsonObject['fossil']* input_to_ghg_map['fossil']
    if ghg_temp_val >= 0:
        ghg_fraction = 1.0 * ghg_temp_val / ghg_max_pos_val
    else:
@@ -167,7 +168,8 @@ def wind():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        jsonObject['Wind_Investment'] += 1
+        jsonObject['wind'] += 1
+        jsonObject['Money'] -= input_to_ghg_map['wind']
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
@@ -176,7 +178,8 @@ def nuclear():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        jsonObject['Nuclear_Investment'] += 1
+        jsonObject['nuclear'] += 1
+        jsonObject['Money'] -= input_to_ghg_map['nuclear']
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
@@ -185,7 +188,8 @@ def solar():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        jsonObject['Solar_Investment'] += 1
+        jsonObject['solar'] += 1
+        jsonObject['Money'] -= input_to_ghg_map['solar']
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
@@ -194,7 +198,8 @@ def fossil():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        jsonObject['Fossil_Investment'] += 1
+        jsonObject['fossil'] += 1
+        jsonObject['Money'] -= input_to_ghg_map['fossil']
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
