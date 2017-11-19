@@ -74,6 +74,8 @@ class App extends Component {
             <button class="btn btn-outline-warning" onClick={this.onClick.bind(this)} id="fossil">fossil</button>
           </div>
         </div>
+         { this.state.Win ? <h1 style={{'color': 'lightgreen'}}><b>YOU HAVE SAVED THE WORLD</b></h1> : null }
+         { this.state.Game_Over ? <h1 style={{'color': 'red'}}><b>YOU LOST TO GLOBAL WARMING</b></h1> : null }
       </div>
     );
   }
