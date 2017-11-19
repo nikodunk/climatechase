@@ -21,29 +21,26 @@ jsonObject = {
         'wind': 0,
         'nuclear': 0,
         'fossil': 0,
+<<<<<<< HEAD
         
+=======
+        'economy': 1.1,
 
+>>>>>>> 2f71346d4fa7755e1a2c4277b36bcb84f5ab4298
         'Sea_Levels': 0,
         'Electricity_Price': 0,
         'Agriculture': 0,
 
-        'Risk_of_Hurricane': 0,
+        #'Risk_of_Hurricane': 0,
         'Hurricanes_Happen': False,
-        'Number_of_Hurricanes': 0,
+        #'Number_of_Hurricanes': 0,
 
-        'Risk_of_Riots': 0,
-        'Riots_Happen': False,
-        'Number_of_Riots': 0,
+        #'Risk_of_Riots': 0,
+        'AC_Happen': False,
+        #'Number_of_Riots': 0,
 
-        'Risk_of_Famines': 0,
-        'Famines_Happen': False,
-        'Number_of_Famines': 0,
+        'GDP_Growth': 0,
 
-        'Risk_of_Recessions': 0,
-        'Recessions_Happen': False,
-        'Number_of_Recessions': 0,
-
-        'GHG': 0,
         'Game_Over': False
     }
 
@@ -66,9 +63,19 @@ def update_climate(jsonObject):
         jsonObject['Game_Over'] = True
         return "Global Warming has overtaken the world. Humanity cannot continue."
     jsonObject['Curr_Year'] += 1
-    jsonObject['GDP'] = round(jsonObject['GDP'] * 1.01, 2)
+<<<<<<< HEAD
+    jsonObject['GDP'] = round(jsonObject['GDP'] * 1.01 + jsonObject['GDP_Growth'], 2)
+=======
+    jsonObject['GDP'] = round(jsonObject['GDP'] * jsonObject['economy'], 2)
+>>>>>>> 2f71346d4fa7755e1a2c4277b36bcb84f5ab4298
     jsonObject['Money'] = round(jsonObject['Money'] + jsonObject['GDP'] * .01, 2)
     jsonObject['GHG'] = update_ghg(jsonObject, input_to_ghg_map)[1]
+    curr_ghg = jsonObject['GHG']
+    hurCalc(curr_ghg) = jsonObject['Hurricanes_Happen']
+    ACCalc(curr_ghg, jsonObject['fossil'], jsonObject['nuclear']) = jsonObject['AC_Happen']
+    agriCalc(curr_ghg, jsonObject['fossil']) = jsonObject['']
+    ecoCalc(curr_ghg, jsonObject['solar'], jsonObject['wind'], jsonObject['nuclear'], jsonObject['fossil']) = jsonObject['GDP_Growth']
+
     return jsonObject
 
 def hurCalc(carbon):
@@ -83,12 +90,6 @@ def ACCalc(carbon, fSpent, nSpent):
     carbon += twoSpent/degree + x
     return carbon > 1
     # if true, armed conflict occurs
-
-def agriCalc(carbon, fSpent):
-    x = random.random()
-    carbon += fSpent/degree + x
-    return carbon
-    # adds to economy growth
 
 def ecoCalc(carbon, sSpent, wSpent, nSpent, fSpent):
     x = random.random()
@@ -117,11 +118,16 @@ def update_ghg(jsonObject, input_to_ghg_map):
 def lose(jsonObject):
     if jsonObject['Game_Over'] or jsonObject['GDP'] < 0 or jsonObject['Money'] < 0:
         return True
+<<<<<<< HEAD
     if jsonObject['Curr_Year'] - jsonObject['Start_Year'] > 500:
+        return jsonObject['GHG'] > .7
+=======
+    if jsonObject['Curr_Year'] - jsonObject['Start_Year'] > 200:
         return jsonObject['GHG'] > 1000000
+>>>>>>> 2f71346d4fa7755e1a2c4277b36bcb84f5ab4298
 
 def win(jsonObject):
-    return jsonObject['GHG'] < 10000
+    return jsonObject['GHG'] < 10000:
 
 #########################################################
 # Routes
@@ -182,7 +188,7 @@ def wind():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['wind'] += 1
-        jsonObject['Money'] -= input_to_ghg_map['wind']
+        jsonObject['Money'] -= input_to_ghg_map['wind']*10
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
@@ -192,7 +198,7 @@ def nuclear():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['nuclear'] += 1
-        jsonObject['Money'] -= input_to_ghg_map['nuclear']
+        jsonObject['Money'] -= input_to_ghg_map['nuclear']*10
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
@@ -202,7 +208,7 @@ def solar():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['solar'] += 1
-        jsonObject['Money'] -= input_to_ghg_map['solar']
+        jsonObject['Money'] -= input_to_ghg_map['solar']*10
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
@@ -212,9 +218,10 @@ def fossil():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['fossil'] += 1
-        jsonObject['Money'] -= input_to_ghg_map['fossil']
+        jsonObject['Money'] -= input_to_ghg_map['fossil']*10
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
 if __name__ == "__main__":
     app.run(debug=True)
+
