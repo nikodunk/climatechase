@@ -62,11 +62,12 @@ class App extends Component {
           <h4> GDP: ${Math.round(this.state.GDP)}B</h4>
           <h4> GHGe: {Math.round(this.state.GHG)}kgCO2</h4>
           <h4>Budget: ${Math.round(this.state.Money)}B</h4>
+          <p>crop yields: 100 | hurricane strength: 0 | violence: 0 | migration: 0</p>
           <hr />
           <p>invest in</p>
         </div>
-        <div class="container">
-          <div class="bottomBox">
+        <div>
+          <div>
             <button class="btn btn-outline-primary" onClick={this.onClick.bind(this)} id="wind">wind</button>
             <button class="btn btn-outline-success" onClick={this.onClick.bind(this)} id="solar">solar</button>
             <button class="btn btn-outline-secondary" onClick={this.onClick.bind(this)} id="nuclear">nuclear</button>
