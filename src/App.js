@@ -52,21 +52,27 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div>
-          <header className="App-header">
+        <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" /><h1 className="App-title">ClimateChase</h1>
-          </header>
-          <h1 className="subtitle" > {this.state.Curr_Year}</h1>
-          <h1 className="subtitle" > GDP: ${this.state.GDP}</h1>
-          <h1 className="subtitle" >Finances: ${this.state.Money}</h1>
+        </header>
+        <div>
+          year <br />
+          <h1>{this.state.Curr_Year}</h1>
+          <hr style={{'max-width': 100}} />
+          <h4> GDP: ${Math.round(this.state.GDP)}</h4>
+          <h4>Finances: ${Math.round(this.state.Money)}</h4>
+          <br />
           <hr />
-          <h2>invest in</h2>
+          <br />
+          <p>invest in</p>
         </div>
-        <div style={{'bottom': '0'}}>
-          <button class="btn btn-outline-primary" onClick={this.onClick.bind(this)} id="wind">wind</button>
-          <button class="btn btn-outline-success" onClick={this.onClick.bind(this)} id="solar">solar</button>
-          <button class="btn btn-outline-secondary" onClick={this.onClick.bind(this)} id="nuclear">nuclear</button>
-          <button class="btn btn-outline-warning" onClick={this.onClick.bind(this)} id="fossil">fossil</button>
+        <div class="container">
+          <div class="bottomBox">
+            <button class="btn btn-outline-primary" onClick={this.onClick.bind(this)} id="wind">wind</button>
+            <button class="btn btn-outline-success" onClick={this.onClick.bind(this)} id="solar">solar</button>
+            <button class="btn btn-outline-secondary" onClick={this.onClick.bind(this)} id="nuclear">nuclear</button>
+            <button class="btn btn-outline-warning" onClick={this.onClick.bind(this)} id="fossil">fossil</button>
+          </div>
         </div>
       </div>
     );
