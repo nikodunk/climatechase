@@ -184,7 +184,7 @@ def wind():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['wind'] += 1
-        jsonObject['Money'] -= input_to_ghg_map['wind']*10
+        jsonObject['Money'] -= input_to_ghg_map['wind']
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
@@ -194,7 +194,7 @@ def nuclear():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['nuclear'] += 1
-        jsonObject['Money'] -= input_to_ghg_map['nuclear']*10
+        jsonObject['Money'] -= input_to_ghg_map['nuclear']
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
@@ -204,7 +204,7 @@ def solar():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['solar'] += 1
-        jsonObject['Money'] -= input_to_ghg_map['solar']*10
+        jsonObject['Money'] -= input_to_ghg_map['solar']
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
@@ -214,7 +214,7 @@ def fossil():
         global jsonObject
         jsonObject = request.get_json()
         jsonObject['fossil'] += 1
-        jsonObject['Money'] -= input_to_ghg_map['fossil']*10
+        jsonObject['Money'] -= input_to_ghg_map['fossil']
         jsonObject = update_climate(jsonObject)
         return json.dumps(jsonObject)
 
