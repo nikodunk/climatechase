@@ -71,16 +71,13 @@ def update_climate(jsonObject):
         print("Global Warming has overtaken the world. Humanity cannot continue.")
         return jsonObject
     jsonObject['Curr_Year'] += 1
-    jsonObject['GDP'] = round(jsonObject['GDP'] * jsonObject['GDP_Growth'], 2)
-    jsonObject['GDP'] = round(jsonObject['GDP'] * 1.01 + jsonObject['GDP_Growth'], 2)
     jsonObject['GDP'] = round(jsonObject['GDP'] * jsonObject['economy'], 2)
     jsonObject['Money'] = round(jsonObject['Money'] + jsonObject['GDP'] * .01, 2)
     jsonObject['GHG'] = update_ghg(jsonObject, input_to_ghg_map)[1]
     curr_ghg = jsonObject['GHG']
-    hurCalc(curr_ghg) = jsonObject['Hurricanes_Happen']
-    ACCalc(curr_ghg, jsonObject['fossil'], jsonObject['nuclear']) = jsonObject['AC_Happen']
-    agriCalc(curr_ghg, jsonObject['fossil']) = jsonObject['']
-    ecoCalc(curr_ghg, jsonObject['solar'], jsonObject['wind'], jsonObject['nuclear'], jsonObject['fossil']) = jsonObject['GDP_Growth']
+    jsonObject['Hurricanes_Happen'] = hurCalc(curr_ghg)
+    jsonObject['AC_Happen'] = ACCalc(curr_ghg, jsonObject['fossil'], jsonObject['nuclear'])
+    jsonObject['GDP_Growth'] = ecoCalc(curr_ghg, jsonObject['solar'], jsonObject['wind'], jsonObject['nuclear'], jsonObject['fossil'])
 
     return jsonObject
 
