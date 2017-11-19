@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  animation: App-logo-spin infinite 2s linear;
   height: 2rem;
   display: inline;
 }
@@ -28,6 +28,18 @@
   to { transform: rotate(360deg); }
 }
 
+.container{
+  margin-top: 100px;
+  width: 100%;
+  position: relative;
+}
+
+.bottomBox{
+  width: 100%;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+}
 
 button{
   height: 100px;
