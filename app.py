@@ -76,7 +76,6 @@ def update_climate(jsonObject):
     jsonObject['GDP_Growth'] = ecoCalc(curr_ghg, jsonObject['solar'], jsonObject['wind'], jsonObject['nuclear'], jsonObject['fossil'])
     jsonObject['economy'] = 1.1 + jsonObject['GDP_Growth']
 
-
     return jsonObject
 
 def hurCalc(carbon):
