@@ -69,7 +69,7 @@ def update_climate(jsonObject):
     jsonObject['Curr_Year'] += 1
     jsonObject['GDP'] = round(jsonObject['GDP'] * jsonObject['economy'], 2)
     jsonObject['Money'] = round(jsonObject['Money'] + jsonObject['GDP'] * .01, 2)
-    jsonObject['GHG'] = update_ghg(jsonObject, input_to_ghg_map)[1]
+    jsonObject['GHG'] *= update_ghg(jsonObject, input_to_ghg_map)[1]
     curr_ghg = jsonObject['GHG']
     jsonObject['Hurricanes_Happen'] = hurCalc(curr_ghg)
     jsonObject['AC_Happen'] = ACCalc(curr_ghg, jsonObject['fossil'], jsonObject['nuclear'])
