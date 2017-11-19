@@ -11,6 +11,7 @@ input_to_ghg_map = {
             "wind": -0.2,
             "fossil": 1.5}
 
+print("run")
 jsonObject = {
         'Start_Year': 2017,
         'Money': 100,
@@ -21,7 +22,7 @@ jsonObject = {
         'wind': 0,
         'nuclear': 0,
         'fossil': 0,
-        'economy': 1.1,
+        'GDP_Growth': 1.1,
 
         'Sea_Levels': 0,
         'Electricity_Price': 0,
@@ -50,22 +51,32 @@ jsonObject = {
 # Processing & Trigger Functions
 #########################################################
 
-def change_wind(jsonObject):
-    pass
     # 1) add money to wind investment
     # 2) Calculate probability of certain action due to wind investment (above/below threshold)
     #     a) Probability of something good happening increases the more wind investment we have
     #     b) Probability of something bad happening increases the longer the game runs (unless we invested properly)
     # 3) Return that something happens
 
+
+def have_lost(jsonObject):
+    if jsonObject['Game_Over'] or jsonObject['GDP'] < 0 or jsonObject['Money'] < 0:
+        return True
+    if jsonObject['Curr_Year'] - jsonObject['Start_Year'] > 200:
+        return jsonObject['GHG'] > 1000000
+
+def have_won(jsonObject):
+    return jsonObject['GHG'] < 10000
+
 def update_climate(jsonObject):
-    if win(jsonObject):
-        return "You have successfully avoided global warming!"
-    if lose(jsonObject):
+    if have_won(jsonObject):
+        print("You have successfully avoided global warming!")
+        return jsonObject
+    if have_lost(jsonObject):
         jsonObject['Game_Over'] = True
-        return "Global Warming has overtaken the world. Humanity cannot continue."
+        print("Global Warming has overtaken the world. Humanity cannot continue.")
+        return jsonObject
     jsonObject['Curr_Year'] += 1
-    jsonObject['GDP'] = round(jsonObject['GDP'] * jsonObject['economy'], 2)
+    jsonObject['GDP'] = round(jsonObject['GDP'] * jsonObject['GDP_Growth'], 2)
     jsonObject['Money'] = round(jsonObject['Money'] + jsonObject['GDP'] * .01, 2)
     jsonObject['GHG'] = update_ghg(jsonObject, input_to_ghg_map)[1]
     return jsonObject
@@ -113,21 +124,13 @@ def update_ghg(jsonObject, input_to_ghg_map):
        ghg_fraction = 1.0 * ghg_temp_val / ghg_max_neg_val
    return (ghg_temp_val, ghg_fraction)
 
-def lose(jsonObject):
-    if jsonObject['Game_Over'] or jsonObject['GDP'] < 0 or jsonObject['Money'] < 0:
-        return True
-    if jsonObject['Curr_Year'] - jsonObject['Start_Year'] > 200:
-        return jsonObject['GHG'] > 1000000
-
-def win(jsonObject):
-    return jsonObject['GHG'] < 10000
-
 #########################################################
 # Routes
 #########################################################
 
 @app.route("/")
 def home():
+    global jsonObject
     jsonObject['Curr_Year'] += 1
     return json.dumps(jsonObject)
 
