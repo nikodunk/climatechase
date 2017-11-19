@@ -14,15 +14,14 @@ input_to_ghg_map = {
 jsonObject = {
         'Start_Year': 2017,
         'Money': 100,
-        'Emissions Per Year (GHG)': 200,
         'GHG': 1000000,
-
+        'GDP': 1000,
         'Curr_Year': 2017,
         'solar': 0,
         'wind': 0,
         'nuclear': 0,
         'fossil': 0,
-        'GDP': 1000,
+        
 
         'Sea_Levels': 0,
         'Electricity_Price': 0,
@@ -61,6 +60,11 @@ def change_wind(jsonObject):
     # 3) Return that something happens
 
 def update_climate(jsonObject):
+    if win(jsonObject):
+        return "You have successfully avoided global warming!"
+    if lose(jsonObject):
+        jsonObject['Game_Over'] = True
+        return "Global Warming has overtaken the world. Humanity cannot continue."
     jsonObject['Curr_Year'] += 1
     jsonObject['GDP'] = round(jsonObject['GDP'] * 1.01, 2)
     jsonObject['Money'] = round(jsonObject['Money'] + jsonObject['GDP'] * .01, 2)
@@ -109,6 +113,15 @@ def update_ghg(jsonObject, input_to_ghg_map):
    else:
        ghg_fraction = 1.0 * ghg_temp_val / ghg_max_neg_val
    return (ghg_temp_val, ghg_fraction)
+
+def lose(jsonObject):
+    if jsonObject['Game_Over'] or jsonObject['GDP'] < 0 or jsonObject['Money'] < 0:
+        return True
+    if jsonObject['Curr_Year'] - jsonObject['Start_Year'] > 500:
+        return jsonObject['GHG'] > .7
+
+def win(jsonObject):
+    return jsonObject['GHG'] < 10000:
 
 #########################################################
 # Routes
