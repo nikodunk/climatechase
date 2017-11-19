@@ -29,13 +29,9 @@ jsonObject = {
         'Electricity_Price': 0,
         'Agriculture': 0,
 
-        #'Risk_of_Hurricane': 0,
         'Hurricanes_Happen': False,
-        #'Number_of_Hurricanes': 0,
 
-        #'Risk_of_Riots': 0,
         'AC_Happen': False,
-        #'Number_of_Riots': 0,
 
         'GDP_Growth': 0,
 
@@ -77,6 +73,7 @@ def update_climate(jsonObject):
     curr_ghg = jsonObject['GHG']
     jsonObject['Hurricanes_Happen'] = hurCalc(curr_ghg)
     jsonObject['AC_Happen'] = ACCalc(curr_ghg, jsonObject['fossil'], jsonObject['nuclear'])
+    jsonObject[''] = agriCalc(curr_ghg, jsonObject['fossil'])
     jsonObject['GDP_Growth'] = ecoCalc(curr_ghg, jsonObject['solar'], jsonObject['wind'], jsonObject['nuclear'], jsonObject['fossil'])
 
     return jsonObject

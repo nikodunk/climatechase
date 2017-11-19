@@ -62,7 +62,7 @@ class App extends Component {
           <h4> GDP: ${Math.round(this.state.GDP)}B</h4>
           <h4> GHGe: {Math.round(this.state.GHG)}kgCO2</h4>
           <h4>Budget: ${Math.round(this.state.Money)}B</h4>
-          <p>crop yields: 100 | hurricane strength: 0 | violence: 0 | migration: 0</p>
+          <p>crop yields: 100 | hurricane strength: 0 | violence: 0 | migration: 0 | sea level: 0</p>
           <hr />
           <p>invest in</p>
         </div>
