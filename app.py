@@ -63,7 +63,7 @@ def change_wind(jsonObject):
 def update_climate(jsonObject):
     jsonObject['Curr_Year'] += 1
     jsonObject['GDP'] = round(jsonObject['GDP'] * 1.01, 2)
-    jsonObject['Money'] round(jsonObject['Money'] + jsonObject['GDP'] * .01, 2)
+    jsonObject['Money'] = round(jsonObject['Money'] + jsonObject['GDP'] * .01, 2)
     jsonObject['GHG'] = update_ghg(jsonObject, input_to_ghg_map)[1]
     return jsonObject
 
