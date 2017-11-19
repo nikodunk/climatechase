@@ -12,7 +12,7 @@ input_to_ghg_map = {
             "Fossil_Investment": 1.5}
 
 jsonObject = {
-        'Money': 1000000000000,
+        'Money': 100,
         'Emissions Per Year (GHG)': 200,
         'GHG': 1000000,
         'Start_Year': 2017,
@@ -21,7 +21,7 @@ jsonObject = {
         'Wind_Investment': 0,
         'Nuclear_Investment': 0,
         'Fossil_Investment': 0,
-        'GDP': 18566900000000,
+        'GDP': 1000,
         'Sea_Levels': 0,
         'Electricity_Price': 0,
         'Agriculture': 0,
@@ -58,7 +58,10 @@ def change_wind(jsonObject):
     #     b) Probability of something bad happening increases the longer the game runs (unless we invested properly)
     # 3) Return that something happens
 
-def update_climate():
+def update_climate(jsonObject):
+    jsonObject['Curr_Year'] += 1
+    jsonObject['GDP'] *= 1.01
+    jsonObject['Money'] += jsonObject['GDP'] * .01
     pass
 
 def hurCalc(carbon):
@@ -162,10 +165,8 @@ def wind():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        jsonObject['Curr_Year'] += 1
-        jsonObject['Money'] -= 1000000
-        jsonObject['Wind_Investment'] += 1000000
-        update_climate()
+        jsonObject['Wind_Investment'] += 1
+        jsonObject = update_climate()
         return json.dumps(jsonObject)
 
 @app.route('/nuclear/', methods=['POST'])
@@ -173,10 +174,8 @@ def nuclear():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        jsonObject['Curr_Year'] += 1
-        jsonObject['Money'] -= 1000000
-        jsonObject['Nuclear_Investment'] += 1000000
-        update_climate()
+        jsonObject['Nuclear_Investment'] += 1
+        jsonObject = update_climate()
         return json.dumps(jsonObject)
 
 @app.route('/solar/', methods=['POST'])
@@ -184,10 +183,8 @@ def solar():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        jsonObject['Curr_Year'] += 1
-        jsonObject['Money'] -= 1000000
-        jsonObject['Solar_Investment'] += 1000000
-        update_climate()
+        jsonObject['Solar_Investment'] += 1
+        jsonObject = update_climate()
         return json.dumps(jsonObject)
 
 @app.route('/fossil/', methods=['POST'])
@@ -195,10 +192,8 @@ def fossil():
     if request.method == 'POST':
         global jsonObject
         jsonObject = request.get_json()
-        jsonObject['Curr_Year'] += 1
-        jsonObject['Money'] -= 1000000
-        jsonObject['Fossil_Investment'] += 1000000
-        update_climate()
+        jsonObject['Fossil_Investment'] += 1
+        jsonObject = update_climate()
         return json.dumps(jsonObject)
 
 if __name__ == "__main__":
