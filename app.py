@@ -121,7 +121,7 @@ def lose(jsonObject):
         return jsonObject['GHG'] > 1000000
 
 def win(jsonObject):
-    return jsonObject['GHG'] < 10000:
+    return jsonObject['GHG'] < 10000
 
 #########################################################
 # Routes
