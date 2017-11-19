@@ -123,10 +123,10 @@ def lose(jsonObject):
     if jsonObject['Game_Over'] or jsonObject['GDP'] < 0 or jsonObject['Money'] < 0:
         return True
     if jsonObject['Curr_Year'] - jsonObject['Start_Year'] > 500:
-        return jsonObject['GHG'] > .7
+        return jsonObject['GHG'] > 1000000
 
 def win(jsonObject):
-    return jsonObject['GHG'] < 10000:
+    return jsonObject['GHG'] < 10000
 
 #########################################################
 # Routes
